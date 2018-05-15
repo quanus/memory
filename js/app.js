@@ -73,7 +73,7 @@ $(function() {
             }
 
             if (moves == 25 || moves == 40 || moves == 60) {   //count stars
-                $(".fa-star:first").removeClass("fa-star");
+                $(".fa-star:first").attr("class","fa fa-star-o");
 
             }
 
