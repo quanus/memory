@@ -26,25 +26,40 @@ function shuffle(array) {
     return array;
 }
 
-// const iconsMatch =function(){
-// 		let val1= $(".card open show" ).html();
-// 		console.log(val1);
-// 		let val2= $(this).attr("class");
-// 		if (val1==val2){
-// 			$(".card open show").attr("class","card match");
-// 		}
-// 	} 
+
+let arrayIcons=$(".card i");
+let allIcons=[];
+
+for (let item of arrayIcons){
+    allIcons.push(item.className);
+}
+shuffle(allIcons);
+console.log(allIcons);
+
+let i=0;
+for(let item of arrayIcons){
+    item.className=allIcons[i];
+    i++;
+}
 
 // let iconsIndex = [...Array(16).keys()];
 // console.log(shuffle(iconsIndex));
 
 // let countOpen = 0;
+let moves = Number($(".moves").text()); //count moves
+console.log(moves);
+
+
+
+
 $(function() {
     let countOpen = $(".card.open.show").length;
-    console.log(countOpen);
+    console.log(countOpen);                         //main function 2 the same then display
     if (countOpen < 2) {
         $("li[class='card'],li[class='card open show']").on("click", function() {
             $(this).toggleClass("open show");
+            moves++;
+            $(".moves").text(String(moves));
             countOpen = $(".card.open.show").length;
             countOpen %= 3;
             console.log(countOpen);
@@ -52,19 +67,28 @@ $(function() {
                 $(".card.open.show").attr("class", "card match");
             }
             if (countOpen == 0) {
-                // setTimeout(() => console.log("Tick"), 1000);
                 $(".card.open.show").attr("class", "card");
                 console.log(countOpen);
                 $(this).toggleClass("open show");
             }
+
+            if (moves == 25 || moves == 40 || moves == 60) {   //count stars
+                $(".fa-star:first").removeClass("fa-star");
+
+            }
+
+
+
         })
     }
 })
 
-$(function(){
-	$("")
-})
 
+
+
+$(function() {
+    $(".restart").on("click", function() { location.reload(); })
+})
 
 /*
  * set up the event listener for a card. If a card is clicked:
